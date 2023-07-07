@@ -16,7 +16,7 @@ if ! wp core is-installed --allow-root --path=/var/www/html/wordpress &> /dev/nu
         --path=/var/www/html/wordpress
 
     wp core install \
-        --url=https://jtanaka.42.fr \
+        --url=https://satushi.42.fr \
         --title="${WP_TITLE}" \
         --admin_user="${WP_ADMIN_USER}" \
         --admin_password="${WP_ADMIN_PASSWORD}" \
