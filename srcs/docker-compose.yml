@@ -23,7 +23,7 @@ services:
     networks:
       - docker-network
     volumes:
-      - mariadb_data:/var/lib/mysql
+      - mariadbdata:/var/lib/mysql
     expose:
       - "3306"
     environment:
@@ -83,8 +83,8 @@ volumes:
       type: none
       o: bind
       device: /home/satushi/data/wordpress
-  mariadb_data:
-    name: mariadb_data
+  mariadbdata:
+    name: mariadbdata
     driver: local
     driver_opts:
       type: none
