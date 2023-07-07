@@ -2,21 +2,23 @@ VOLUME_DIR = /home/satushi/data
 VOLUME_WP_DIR = ${VOLUME_DIR}/wordpress
 VOLUME_DB_DIR = ${VOLUME_DIR}/mariadb
 
-.PHONY: all
 all: setup_volume_dir
 	docker-compose -f srcs/docker-compose.yml up &
 
-.PHONY: clean
 clean:
 	docker-compose -f srcs/docker-compose.yml down
 
-.PHONY: fclean
 fclean: clean
 
-.PHONY: re
 re: fclean all
 
-.PHONY: setup_volume_dir
+complete_down: fclean
+	sudo rm -rf $(VOLUME_WP_DIR)
+	sudo rm -rf $(VOLUME_DB_DIR)
+	docker system prune -a --force --volumes
+	docker network prune --force
+	docker volume prune --force
+
 setup_volume_dir:
 	@if [ ! -d ${VOLUME_WP_DIR} ] ; then \
 		sudo mkdir -p ${VOLUME_WP_DIR}; \
