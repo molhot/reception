@@ -40,8 +40,8 @@ chown -R www-data:www-data /var/www/html/* \
 
 sed -i "s|listen = /run/php/php7.3-fpm.sock|listen = 9000|g" /etc/php/7.3/fpm/pool.d/www.conf
 sed -i "s|skip-networking|# skip-networking|g" /etc/php/7.3/fpm/pool.d/www.conf
-# wordpressのコメント投稿処理が遅いのでそれの対応
-sed -i "s|;request_terminate_timeout = 0|request_terminate_timeout = 300|g" /etc/php/7.3/fpm/pool.d/www.conf
+# # wordpressのコメント投稿処理が遅いのでそれの対応
+# sed -i "s|;request_terminate_timeout = 0|request_terminate_timeout = 300|g" /etc/php/7.3/fpm/pool.d/www.conf
 
 
 # PIDファイル
