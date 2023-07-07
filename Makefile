@@ -6,7 +6,7 @@ all: setup_volume_dir
 	docker-compose -f srcs/docker-compose.yml up &
 
 clean:
-	docker-compose -f srcs/docker-compose.yml down -q
+	docker-compose -f srcs/docker-compose.yml down
 
 fclean: clean
 
