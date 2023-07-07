@@ -13,7 +13,7 @@ services:
     networks:
       - docker-network
     volumes:
-      - wordpress_data:/var/www/html/wordpress
+      - wordpressdata:/var/www/html/wordpress
 
   mariadb:
     build: requirements/mariadb
@@ -51,7 +51,7 @@ services:
     expose:
       - "9000"
     volumes:
-      - wordpress_data:/var/www/html/wordpress
+      - wordpressdata:/var/www/html/wordpress
     environment:
       WP_DB_HOST: mariadb
       WP_DB_USER: ${WP_DATABASE_USER}
@@ -76,8 +76,8 @@ networks:
     name: docker-network
 
 volumes:
-  wordpress_data:
-    name: wordpress_data
+  wordpressdata:
+    name: wordpressdata
     driver: local
     driver_opts:
       type: none
