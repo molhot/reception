@@ -31,12 +31,12 @@ services:
       WP_DATABASE_NAME: ${WP_DATABASE_NAME}
       WP_DATABASE_USER: ${WP_DATABASE_USER}
       WP_DATABASE_PASSWORD: ${WP_DATABASE_PASSWORD}
-    healthcheck:
-      test: mysql --protocol=tcp -u"$WP_DATABASE_USER" -p"$WP_DATABASE_PASSWORD" -hlocalhost --database="$WP_DATABASE_NAME" -e 'SELECT 1' &> /dev/null
-      interval: 5s
-      timeout: 10s
-      retries: 10
-      start_period: 10s
+    # healthcheck:
+    #   test: mysql --protocol=tcp -u"$WP_DATABASE_USER" -p"$WP_DATABASE_PASSWORD" -hlocalhost --database="$WP_DATABASE_NAME" -e 'SELECT 1' &> /dev/null
+    #   interval: 5s
+    #   timeout: 10s
+    #   retries: 10
+    #   start_period: 10s
 
   wordpress:
     build: requirements/wordpress
@@ -46,8 +46,7 @@ services:
     networks:
       - docker-network
     depends_on:
-      mariadb:
-        condition: service_healthy
+      - mariadb
     expose:
       - "9000"
     volumes:
@@ -64,12 +63,12 @@ services:
       WP_USER: ${WP_USER}
       WP_PASSWORD: ${WP_PASSWORD}
       WP_EMAIL: ${WP_EMAIL}
-    healthcheck:
-      test: wp core is-installed --allow-root --path=/var/www/html/wordpress &> /dev/null
-      interval: 5s
-      timeout: 30s
-      retries: 10
-      start_period: 30s
+    # healthcheck:
+    #   test: wp core is-installed --allow-root --path=/var/www/html/wordpress &> /dev/null
+    #   interval: 5s
+    #   timeout: 30s
+    #   retries: 10
+    #   start_period: 30s
 
 networks:
   docker-network:
