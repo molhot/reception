@@ -9,7 +9,7 @@ done
   
 >&2 echo "mariadb is up - executing command"
 
-if [ ! -d /var/www/wordpress ]
+if [ ! -d /var/www/wordpress ] ; then
     mkdir -p /var/www/wordpress
 fi
 
