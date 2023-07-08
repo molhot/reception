@@ -46,8 +46,8 @@ services:
     networks:
       - docker-network
     depends_on:
-      mariadb:
-        condition: service_healthy
+      mariadb
+        # condition: service_healthy
     expose:
       - "9000"
     volumes:
