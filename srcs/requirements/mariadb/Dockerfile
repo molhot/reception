@@ -7,5 +7,6 @@ RUN apt-get update \
   && apt-get install -y vim
 
 COPY tools/configure.sh /tmp/configure.sh
+RUN chmod +x /tmp/configure.sh
 
 CMD [ "bash", "/tmp/configure.sh" ]
