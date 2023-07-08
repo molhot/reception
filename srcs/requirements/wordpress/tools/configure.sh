@@ -1,5 +1,14 @@
 #!/bin/bash
 
+set -e
+
+until mysqladmin --host=mariadb --user=$WP_ADMIN_USER --silent ping; do
+  >&2 echo "mariadb is sleeping"
+  sleep 10
+done
+  
+>&2 echo "mariadb is up - executing command"
+
 if [ ! -d /var/www/wordpress ]
     mkdir -p /var/www/wordpress
 fi

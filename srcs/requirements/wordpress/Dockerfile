@@ -31,5 +31,6 @@ RUN sed -i "s|skip-networking|# skip-networking|g" /etc/php/7.3/fpm/pool.d/www.c
 # WordPress
 WORKDIR /var/www/html
 COPY ./tools/configure.sh /tmp/configure.sh
+RUN chmod +x /tmp/configure.sh
 
 ENTRYPOINT ["/tmp/configure.sh"]
