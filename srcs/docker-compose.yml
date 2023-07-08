@@ -46,7 +46,7 @@ services:
     networks:
       - docker-network
     depends_on:
-      mariadb
+      - mariadb
     expose:
       - "9000"
     volumes:
