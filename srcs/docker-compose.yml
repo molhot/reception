@@ -46,7 +46,8 @@ services:
     networks:
       - docker-network
     depends_on:
-      - mariadb
+      mariadb:
+        condition: service_healthy
     expose:
       - "9000"
     volumes:
@@ -63,12 +64,12 @@ services:
       WP_USER: ${WP_USER}
       WP_PASSWORD: ${WP_PASSWORD}
       WP_EMAIL: ${WP_EMAIL}
-    # healthcheck:
-    #   test: wp core is-installed --allow-root --path=/var/www/html/wordpress &> /dev/null
-    #   interval: 5s
-    #   timeout: 30s
-    #   retries: 10
-    #   start_period: 30s
+    healthcheck:
+      test: wp core is-installed --allow-root --path=/var/www/html/wordpress &> /dev/null
+      interval: 5s
+      timeout: 30s
+      retries: 10
+      start_period: 30s
 
 networks:
   docker-network:
@@ -89,5 +90,3 @@ volumes:
       type: none
       o: bind
       device: /home/satushi/data/mariadb
-
-# condition: service_healthy
