@@ -47,7 +47,6 @@ services:
       - docker-network
     depends_on:
       mariadb
-        # condition: service_healthy
     expose:
       - "9000"
     volumes:
@@ -90,3 +89,5 @@ volumes:
       type: none
       o: bind
       device: /home/satushi/data/mariadb
+
+# condition: service_healthy
