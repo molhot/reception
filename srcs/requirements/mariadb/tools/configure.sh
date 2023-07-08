@@ -56,7 +56,11 @@ EOF
 }
 
 # $1 には daemon 名を渡す
-echo '$@:' "$@"
+# echo '$@:' "$@"
+
+sed -i "s|skip-networking|# skip-networking|g" /etc/mysql/mariadb.conf.d/50-server.cnf
+sed -i "s|.*bind-address\s*=.*|bind-address=0.0.0.0|g" /etc/mysql/mariadb.conf.d/50-server.cnf
+
 if [! -d /run/mysqld ]
 then
   mkdir -p /run/mysqld
@@ -85,7 +89,8 @@ cat << EOF > init.sql
 EOF
 
 mysqld --user=mysql --bootstrap < init.sql
-  # fi
+
+fi
 
   # echo "Stopping temporary server"
   # docker_temp_server_stop
@@ -93,7 +98,4 @@ mysqld --user=mysql --bootstrap < init.sql
 
   # allow remote connections
 
-  sed -i "s|skip-networking|# skip-networking|g" /etc/mysql/mariadb.conf.d/50-server.cnf
-  sed -i "s|.*bind-address\s*=.*|bind-address=0.0.0.0|g" /etc/mysql/mariadb.conf.d/50-server.cnf
-
-  exec mysqld --user=mysql --console
+exec mysqld --user=mysql --console
