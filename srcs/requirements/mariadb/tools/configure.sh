@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "mariadb install"
+
 if [ ! -d /run/mysqld ]
 then
   mkdir -p /run/mysqld

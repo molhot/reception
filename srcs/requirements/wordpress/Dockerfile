@@ -17,7 +17,6 @@ RUN apt-get update \
   curl \
   vim
 
-# wp-cli
 RUN apt-get update && \
   apt-get install -y curl
 
@@ -33,4 +32,4 @@ WORKDIR /var/www/html
 COPY ./tools/configure.sh /tmp/configure.sh
 RUN chmod +x /tmp/configure.sh
 
-ENTRYPOINT ["/tmp/configure.sh"]
+CMD [ "bash", "/tmp/configure.sh"]
