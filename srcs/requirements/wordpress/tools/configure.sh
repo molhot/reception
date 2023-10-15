@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 until mysqladmin --host=mariadb --user=$WP_ADMIN_USER --silent ping; do
   >&2 echo "mariadb is sleeping"
   sleep 10
