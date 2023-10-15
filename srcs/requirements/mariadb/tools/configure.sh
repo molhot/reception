@@ -1,7 +1,5 @@
 #!/bin/bash
-
 echo "mariadb install"
-
 if [ ! -d /run/mysqld ]
 then
   mkdir -p /run/mysqld
@@ -29,9 +27,6 @@ cat << EOF > init.sql
     DROP DATABASE IF EXISTS $WP_DATABASE_NAME;
     CREATE DATABASE $WP_DATABASE_NAME CHARACTER SET utf8;
 EOF
-
 mysqld --user=mysql --bootstrap < init.sql
-
 fi
-
 exec mysqld --user=mysql --console

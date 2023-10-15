@@ -1,15 +1,10 @@
 #!/bin/bash
-
-set -e
-
 until mysqladmin --host=mariadb --user=$WP_ADMIN_USER --silent ping; do
   >&2 echo "mariadb is sleeping"
   sleep 10
 done
 >&2 echo "mariadb is READY!"
-  
 >&2 echo "mariadb is up - executing command"
-
 if ! wp core is-installed --allow-root --path=/var/www/html/wordpress &> /dev/null ; then
     >&2 echo "Install WordPress"
     >&2 echo "check text"
@@ -35,14 +30,8 @@ if ! wp core is-installed --allow-root --path=/var/www/html/wordpress &> /dev/nu
 else
     >&2 echo "Install already WordPress"
 fi
-
-chown -R www-data:www-data /var/www/html/* \
-    && find /var/www/html/ -type d -exec chmod 755 {} + \
-    && find /var/www/html/ -type f -exec chmod 644 {} +
-
+chown -R www-data:www-data /var/www/html/* && find /var/www/html/ -type d -exec chmod 755 {} + && find /var/www/html/ -type f -exec chmod 644 {} +
 # PIDファイル
 mkdir -p /run/php
-
 echo "start php-fpm7.3"
-
 exec php-fpm7.3 -R -F
